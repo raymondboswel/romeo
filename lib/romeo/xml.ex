@@ -24,7 +24,7 @@ defmodule Romeo.XML do
   def encode!({:xmlel, _, _, _} = xml), do:
     :fxml.element_to_binary(xml)
   def encode!({:xmlstreamstart, name, attrs}), do:
-    encode!({:xmlel, name, attrs, []}) |> String.replace("/>", ">")
+    "<?xml version='1.0'?>" <> encode!({:xmlel, name, attrs, []}) |> String.replace("/>", ">")
   def encode!({:xmlstreamend, name}), do:
     "</#{name}>"
 
